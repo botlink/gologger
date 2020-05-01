@@ -4,6 +4,10 @@ Gologger is a concurrent **thread safe** logging system which writes to the file
 
 As soon as data is append to the queue the Write() function will return resulting in **none blocking** logging.
 
+### Install
+
+> go get github.com/syrinsecurity/gologger
+
 ### Examples
 
 Custom loggers
