@@ -68,4 +68,4 @@ Get the size of all queues:
 
 > gologger.QueueSize()
 
-For more examples look at https://github.com/syrinsecurity/gologger/examples
+For more examples look at https://github.com/syrinsecurity/gologger/tree/master/examples
