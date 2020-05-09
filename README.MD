@@ -67,3 +67,5 @@ func main() {
 Get the size of all queues:
 
 > gologger.QueueSize()
+
+For more examples look at https://github.com/syrinsecurity/gologger/examples
