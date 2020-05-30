@@ -12,6 +12,9 @@ const (
 
 	//SystemLogIfCreateFail will log to stdout and LogError if the creation of the Logger fails
 	SystemLogIfCreateFail = 0
+
+	//PanicIfFileError will panic the program if a error is encountered
+	PanicIfFileError = 1
 )
 
 var (

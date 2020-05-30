@@ -21,6 +21,8 @@ func New(filename string, bufferSize int, options ...int) (Logger, error) {
 		for _, val := range options {
 			if val == SystemLogIfCreateFail {
 				WritePrint(LogError, "Logger \""+filename+"\"", err)
+			} else if PanicIfFileError == val {
+				panic(err)
 			}
 		}
 		return Logger{}, err
