@@ -31,18 +31,23 @@ type CustomLogger struct {
 
 //NewCustomLogger creates a new custom logger
 func NewCustomLogger(path string, extention string, bufferSize int) *CustomLogger {
-	return &CustomLogger{
+	logger := &CustomLogger{
 		Extention: extention,
 		queue:     make(chan []byte, bufferSize),
 		close:     make(chan struct{}),
 
 		NameingConvention: func() string {
-			return fmt.Sprint(time.Now().Year())
+			return ""
 		},
-		LineTerminator:   "\n",
-		Path:             path,
-		ConventionUpdate: time.Hour * 24,
+
+		//Never bother updating the convention
+		ConventionUpdate: ((time.Hour * 24) * 7) * 2000,
+
+		LineTerminator: "\n",
+		Path:           path,
 	}
+
+	return logger
 }
 
 func (l *CustomLogger) Write(data interface{}) {
@@ -95,7 +100,7 @@ func (l *CustomLogger) Service() error {
 			handle.Write(append(data, l.LineTerminator...))
 			break
 		case <-l.close:
-			return nil
+			return handle.Close()
 		}
 	}
 }

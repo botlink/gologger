@@ -1,17 +1,17 @@
 package main
 
 import (
-	"time"
-
 	"github.com/syrinsecurity/gologger"
 )
 
 func main() {
-	log := gologger.NewCustomLogger("./logs-", ".txt", 200)
+	log := gologger.NewCustomLogger("./logs-", ".txt", 0)
+
+	//This will make the filename update every month for example: logs-Jul-2020.txt
+	gologger.SetNameConventionMonthYear(log)
 	go log.Service()
+	defer log.Close()
 
 	log.Write("test")
 
-	time.Sleep(time.Second * 1)
-	log.Close()
 }
