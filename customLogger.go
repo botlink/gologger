@@ -53,32 +53,41 @@ func (l *CustomLogger) getFileName() string {
 	return l.Path + l.NameingConvention() + l.Extention
 }
 
-func (l *CustomLogger) getFileHandle() (*os.File, error) {
+func (l *CustomLogger) getFileHandle() (*os.File, string, error) {
 	fileName := l.getFileName()
 
 	file, err := os.OpenFile(fileName, os.O_APPEND|os.O_WRONLY|os.O_CREATE, 0600)
 	if err != nil {
-		return nil, err
+		return nil, "", err
 	}
 
-	return file, nil
+	return file, fileName, nil
 }
 
 //Service will start the logging service
 func (l *CustomLogger) Service() error {
 
-	handle, err := l.getFileHandle()
+	handle, fileName, err := l.getFileHandle()
 	if err != nil {
 		return err
 	}
 
+	var newFileName string
 	for {
 		select {
 
 		case <-time.NewTicker(l.ConventionUpdate).C:
-			handle, err = l.getFileHandle()
+
+			handle, newFileName, err = l.getFileHandle()
 			if err != nil {
 				return err
+			}
+
+			fileName = newFileName
+
+			if l.ConventionUpdated != nil {
+				//Run on another goroutine to prevent the service worker from hanging
+				go l.ConventionUpdated(fileName, newFileName)
 			}
 
 			break
