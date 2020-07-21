@@ -1,6 +1,7 @@
 package gologger
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"time"
@@ -17,6 +18,9 @@ type CustomLogger struct {
 	//LineTerminator usually is "\n"
 	LineTerminator string
 
+	//ValueSeperator is inserted after each value in the data array of a write
+	ValueSeperator string
+
 	//ConventionUpdate is how long the logger should wait until it checks the current naming convention and if its time to change the file handle will be changed
 	ConventionUpdate time.Duration
 
@@ -26,6 +30,7 @@ type CustomLogger struct {
 	ConventionUpdated func(oldFile string, newFile string)
 
 	queue chan ([]byte)
+
 	close chan (struct{})
 }
 
@@ -45,13 +50,30 @@ func NewCustomLogger(path string, extention string, bufferSize int) *CustomLogge
 
 		LineTerminator: "\n",
 		Path:           path,
+		ValueSeperator: " ",
 	}
 
 	return logger
 }
 
-func (l *CustomLogger) Write(data interface{}) {
-	l.queue <- []byte(fmt.Sprint(data))
+func (l *CustomLogger) Write(data ...interface{}) {
+
+	var payload []byte
+	for i, x := range data {
+
+		if i != 0 {
+			payload = append(payload, []byte(l.ValueSeperator)...)
+		}
+
+		switch x.(type) {
+		case []byte:
+			payload = append(payload, x.([]byte)...)
+		default:
+			payload = append(payload, fmt.Sprint(x)...)
+		}
+	}
+
+	l.queue <- payload
 }
 
 func (l *CustomLogger) getFileName() string {
@@ -108,4 +130,15 @@ func (l *CustomLogger) Service() error {
 //Close will shutdown the service worker
 func (l *CustomLogger) Close() {
 	l.close <- struct{}{}
+}
+
+//WriteJSON will take in a object and serialise it as JSON
+func (l *CustomLogger) WriteJSON(object interface{}) {
+
+	b, err := json.Marshal(object)
+	if err != nil {
+		return
+	}
+
+	l.queue <- b
 }
