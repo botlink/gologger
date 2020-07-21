@@ -13,7 +13,7 @@ func main() {
 		panic(err)
 	}
 
-	//All logs are seperated by a new line "\n"
+	//All logs are separated by a new line "\n"
 	logger.Write("This is some data.", []string{"a interface is allowed to be used", "fmt is used to format this data"}, 45, []int{1, 2, 3, 4})
 	logger.WriteString("This will write all the input as text only rather than a array of items like logger.Write().", "This also accepts a interface")
 	logger.WritePrint("This will write this data to the log file but also print it out with a timestamp")
