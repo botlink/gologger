@@ -16,7 +16,7 @@ Gologger is a concurrent **thread safe** logging system which writes to the file
 No need to worry about leaking file descriptors as Gologger only opens one descriptor per file.
 
 - Non blocking, uses a queue whith a service worker to proccess logs.
-- Threat/Concurrent **safe**.
+- Thread/Concurrent **safe**.
 - Supports any data type! Supports interface{} type.
 - Use logger just like fmt, provide as many arguments as you need.
 
