@@ -10,11 +10,15 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 
-
+<img align="right" src="./.github/images/logo.png">
 
 Gologger is a concurrent **thread safe** logging system which writes to the filesystem. Gologger utilises a service worker model with buffered channels/queues.
+No need to worry about leaking file descriptors as Gologger only opens one descriptor per file.
 
-As soon as data is append to the queue the Write() function will return resulting in **none blocking** logging.
+- Non blocking, uses a queue whith a service worker to proccess logs.
+- Thread/Concurrent **safe**.
+- Supports any data type! Supports interface{} type.
+- Use logger just like fmt, provide as many arguments as you need.
 
 ### Install
 
