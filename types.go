@@ -28,6 +28,7 @@ var (
 	Traffic = LogType{2}
 )
 
+//LogType is a datatype for determening what logger to use
 type LogType struct {
 	int
 }
