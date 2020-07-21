@@ -1,5 +1,9 @@
 # Gologger
 
+![Go report card](https://goreportcard.com/badge/github.com/syrinsecurity/gologger)
+[![Build Status](https://travis-ci.org/syrinsecurity/gologger.svg?branch=master)](https://travis-ci.org/syrinsecurity/gologger)
+[![GoDoc](https://godoc.org/github.com/syrinsecurity/gologger?status.svg)](https://godoc.org/github.com/syrinsecurity/gologger)
+
 Gologger is a concurrent **thread safe** logging system which writes to the filesystem. Gologger utilises a service worker model with buffered channels/queues.
 
 As soon as data is append to the queue the Write() function will return resulting in **none blocking** logging.
