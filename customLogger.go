@@ -56,10 +56,15 @@ func NewCustomLogger(path string, extention string, bufferSize int) *CustomLogge
 	return logger
 }
 
+//Write will add the data to the queue then write to disk
 func (l *CustomLogger) Write(data ...interface{}) {
+	payload := l.convertInput(data)
+	l.queue <- payload
+}
 
+func (l *CustomLogger) convertInput(input []interface{}) []byte {
 	var payload []byte
-	for i, x := range data {
+	for i, x := range input {
 
 		if i != 0 {
 			payload = append(payload, []byte(l.ValueSeperator)...)
@@ -73,6 +78,13 @@ func (l *CustomLogger) Write(data ...interface{}) {
 		}
 	}
 
+	return payload
+}
+
+//WritePrint will write the data to the file but also print it to the screen
+func (l *CustomLogger) WritePrint(data ...interface{}) {
+	payload := l.convertInput(data)
+	println(string(payload))
 	l.queue <- payload
 }
 
