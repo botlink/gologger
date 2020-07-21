@@ -3,6 +3,14 @@
 ![Go report card](https://goreportcard.com/badge/github.com/syrinsecurity/gologger)
 [![Build Status](https://travis-ci.org/syrinsecurity/gologger.svg?branch=master)](https://travis-ci.org/syrinsecurity/gologger)
 [![GoDoc](https://godoc.org/github.com/syrinsecurity/gologger?status.svg)](https://godoc.org/github.com/syrinsecurity/gologger)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/syrinsecurity/gologger/graphs/commit-activity)
+[![License](https://img.shields.io/github/license/syrinsecurity/gologger.svg)](https://github.com/syrinsecurity/gologger/blob/master/LICENSE)
+[![GitHub release](https://img.shields.io/github/release/syrinsecurity/gologger.svg)](https://GitHub.com/syrinsecurity/gologger/releases/)
+[![GitHub issues](https://img.shields.io/github/issues/syrinsecurity/gologger.svg)](https://GitHub.com/syrinsecurity/gologger/issues/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+
+
+
 
 Gologger is a concurrent **thread safe** logging system which writes to the filesystem. Gologger utilises a service worker model with buffered channels/queues.
 
