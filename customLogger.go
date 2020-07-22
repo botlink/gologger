@@ -154,3 +154,8 @@ func (l *CustomLogger) WriteJSON(object interface{}) {
 
 	l.queue <- b
 }
+
+//QueueLength returns the length of the queue
+func (l *CustomLogger) QueueLength() int {
+	return len(l.queue)
+}
