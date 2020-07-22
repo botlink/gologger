@@ -129,7 +129,24 @@ func main() {
 - SetNameConventionYear()		2006
 - SetNameConventionDayMonthYear()	Monday-Jan-2006
 
-Get the size of all queues:
+You can create your own naming conventions by setting ``logger.NameingConvention`` to equal a func() string of your choosing.
+**Note** By default the naming convention returns a empty string. If you do not want to use a naming convention you can just not modify the default.
+
+### Settings
+
+- LineTerminator - Appends a suffix to the end of the log, default is "\n"
+- ValueSeperator - Is the value inbetween each value insert when you use multipule values on the write method, default is " "
+- ConventionUpdate - Determins how often the filename should be checked for new changes
+- Extention - This is your file extention what is appened after the name convention
+- Path - This is where you want to store the log file, it also includes the start of the filename
+
+### Methods & Callbacks
+
+- Close() - This will shutdown the service worker
+- ConventionUpdated(oldFile string, newFile string) - This call back is returned when the naming convention has changed thus a new log file has been created.
+	- You could use this callback to backup the "old" log file.
+
+Get the size of all basic queues:
 
 > gologger.QueueSize()
 
