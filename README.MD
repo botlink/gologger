@@ -129,7 +129,7 @@ func main() {
 - SetNameConventionYear()		2006
 - SetNameConventionDayMonthYear()	Monday-Jan-2006
 
-You can create your own naming conventions by setting ``logger.NameingConvention`` to equal a func() string of your choosing.
+You can create your own naming conventions by setting ``logger.NamingConvention`` to equal a func() string of your choosing.
 **Note** By default the naming convention returns a empty string. If you do not want to use a naming convention you can just not modify the default.
 
 ### Settings
