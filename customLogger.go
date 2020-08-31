@@ -12,8 +12,8 @@ type CustomLogger struct {
 	Path string
 	//Extention is the file extention; .txt, .json, .log
 	Extention string
-	//NameingConvention returns a string which will be used as the filename
-	NameingConvention func() string
+	//NamingConvention returns a string which will be used as the filename
+	NamingConvention func() string
 
 	//LineTerminator usually is "\n"
 	LineTerminator string
@@ -41,7 +41,7 @@ func NewCustomLogger(path string, extention string, bufferSize int) *CustomLogge
 		queue:     make(chan []byte, bufferSize),
 		close:     make(chan struct{}),
 
-		NameingConvention: func() string {
+		NamingConvention: func() string {
 			return ""
 		},
 
@@ -89,7 +89,7 @@ func (l *CustomLogger) WritePrint(data ...interface{}) {
 }
 
 func (l *CustomLogger) getFileName() string {
-	return l.Path + l.NameingConvention() + l.Extention
+	return l.Path + l.NamingConvention() + l.Extention
 }
 
 func (l *CustomLogger) getFileHandle() (*os.File, string, error) {

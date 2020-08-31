@@ -9,7 +9,7 @@ func SetNameConventionMonthYear(logger *CustomLogger) {
 	//Check every 24 hours if a month as elapsed
 	logger.ConventionUpdate = time.Hour * 24
 
-	logger.NameingConvention = func() string {
+	logger.NamingConvention = func() string {
 		return time.Now().Format("Jan-2006")
 	}
 }
@@ -19,7 +19,7 @@ func SetNameConventionYear(logger *CustomLogger) {
 	//Check every 24 hours if a month as elapsed
 	logger.ConventionUpdate = time.Hour * 24
 
-	logger.NameingConvention = func() string {
+	logger.NamingConvention = func() string {
 		return time.Now().Format("2006")
 	}
 }
@@ -29,7 +29,7 @@ func SetNameConventionDayMonthYear(logger *CustomLogger) {
 	//Check every minute to make sure it stays up to date
 	logger.ConventionUpdate = time.Minute
 
-	logger.NameingConvention = func() string {
+	logger.NamingConvention = func() string {
 		return time.Now().Format("Monday-Jan-2006")
 	}
 }
